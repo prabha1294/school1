@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greenfield International School</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14325c;--chalk:#f2b632;--paper:#fbfaf6;--leaf:#1f7a5c;--mist:#e9eef5;--text:#26303d;--r:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito Sans',system-ui,sans-serif;color:var(--text);background:var(--paper);line-height:1.6}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;color:var(--ink);line-height:1.2}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--chalk);outline-offset:2px}
+.wrap{max-width:1140px;margin:auto;padding:0 20px}
+section{padding:64px 0}
+section.alt{background:var(--mist)}
+.sec-title{font-size:2rem;margin-bottom:8px}
+.sub{max-width:60ch;margin-bottom:32px;color:#55606e}
+.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:#fff;border:1px solid #dfe5ee;border-radius:var(--r);padding:22px}
+.card h3{font-size:1.15rem;margin-bottom:6px}
+.btn{display:inline-block;background:var(--chalk);color:#2a2000;font-weight:700;padding:12px 24px;border-radius:var(--r);border:0;cursor:pointer;font:inherit;font-weight:700}
+.btn.dark{background:var(--ink);color:#fff}
+/* header */
+.top{background:var(--ink);color:#dbe5f3;font-size:.85rem;padding:7px 0}
+.top .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+nav{background:#fff;border-bottom:3px solid var(--chalk);position:sticky;top:0;z-index:20}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px}
+.logo{font-family:'Fraunces',serif;font-weight:800;font-size:1.35rem;color:var(--ink)}
+.logo span{color:var(--leaf)}
+.links{display:flex;gap:4px;flex-wrap:wrap}
+.links a{padding:8px 12px;border-radius:8px;font-weight:600}
+.links a:hover,.links a.on{background:var(--mist);color:var(--ink)}
+/* hero */
+.hero{background:linear-gradient(120deg,rgba(20,50,92,.94),rgba(31,122,92,.85)),repeating-linear-gradient(0deg,#14325c 0 38px,#173a68 38px 40px);color:#fff;padding:96px 0}
+.hero h1{color:#fff;font-size:clamp(2.2rem,5vw,3.8rem);max-width:16ch;margin-bottom:16px}
+.hero p{max-width:52ch;font-size:1.1rem;margin-bottom:26px;color:#e3ecf7}
+.split{display:grid;gap:36px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:center}
+.ph{background:linear-gradient(135deg,var(--mist),#cfdbea);border-radius:var(--r);min-height:240px;display:grid;place-items:center;color:var(--ink);font-weight:700;text-align:center;padding:16px}
+.stats{background:var(--ink);color:#fff;padding:44px 0}
+.stats .grid{text-align:center}
+.stats b{font-family:'Fraunces',serif;font-size:2.6rem;color:var(--chalk);display:block}
+.date{display:inline-block;background:var(--chalk);color:#2a2000;font-weight:700;font-size:.8rem;padding:2px 10px;border-radius:20px;margin-bottom:8px}
+blockquote{border-left:4px solid var(--chalk);padding-left:16px;font-style:italic}
+/* forms */
+form{display:grid;gap:12px;max-width:520px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #c5cedb;border-radius:8px;font:inherit;background:#fff}
+iframe{width:100%;height:320px;border:0;border-radius:var(--r)}
+ul.tick{list-style:none}ul.tick li{padding:6px 0 6px 26px;position:relative}
+ul.tick li:before{content:"✓";position:absolute;left:0;color:var(--leaf);font-weight:800}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--r);overflow:hidden}
+th,td{padding:11px 14px;border-bottom:1px solid #e3e8ef;text-align:left}
+th{background:var(--mist);color:var(--ink)}
+.scroll{overflow-x:auto}
+footer{background:#0f2646;color:#bccbe0;padding:44px 0 20px}
+footer h3{color:#fff;font-size:1.1rem;margin-bottom:8px}
+footer a{display:block;padding:2px 0}
+.copy{border-top:1px solid #29426a;margin-top:28px;padding-top:14px;font-size:.85rem;text-align:center}
+/* pages */
+.page{display:none}.page.show{display:block}
+.head{background:var(--mist);padding:46px 0}
+.head h1{font-size:2.3rem}
+/* admin */
+.adm{display:grid;grid-template-columns:230px 1fr;gap:20px;min-height:520px}
+.side{background:var(--ink);border-radius:var(--r);padding:12px}
+.side button{display:block;width:100%;text-align:left;background:none;border:0;color:#dbe5f3;padding:9px 12px;border-radius:8px;cursor:pointer;font:inherit}
+.side button.on,.side button:hover{background:rgba(255,255,255,.14)}
+.kpi b{font-family:'Fraunces',serif;font-size:2rem;color:var(--ink);display:block}
+.pill{font-size:.75rem;background:var(--mist);padding:2px 8px;border-radius:12px}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--leaf);color:#fff;padding:12px 18px;border-radius:var(--r);display:none;z-index:50}
+@media(max-width:760px){.adm{grid-template-columns:1fr}.links{font-size:.9rem}}
+@media(prefers-reduced-motion:no-preference){.hero h1{animation:rise .8s ease both}@keyframes rise{from{opacity:0;transform:translateY(14px)}}}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <span>📞 +91 98765 43210 &nbsp; ✉ info@greenfieldschool.edu</span>
+  <span><a href="#" style="display:inline">Facebook</a> &nbsp; <a href="#" style="display:inline">Instagram</a> &nbsp; <a href="#" style="display:inline">YouTube</a></span>
+</div></div>
+
+<nav><div class="wrap">
+  <a class="logo" href="#home">Green<span>field</span> School</a>
+  <div class="links" id="links">
+    <a href="#home">Home</a><a href="#about">About</a><a href="#academics">Academics</a><a href="#admissions">Admissions</a><a href="#facilities">Facilities</a><a href="#gallery">Gallery</a><a href="#news">News</a><a href="#contact">Contact</a><a href="#login">Login</a>
+  </div>
+</div></nav>
+
+<!-- HOME -->
+<main>
+<div class="page" id="home">
+  <div class="hero"><div class="wrap">
+    <h1>Where curious minds grow</h1>
+    <p>Welcome to Greenfield International School: caring teachers, smart classrooms and a campus built for learning from Pre-Primary to Grade 12.</p>
+    <a class="btn" href="#admissions">Apply for admission</a> <a class="btn dark" href="#contact">Book a campus visit</a>
+  </div></div>
+
+  <section><div class="wrap split">
+    <div><h2 class="sec-title">About our school</h2>
+      <p>Founded in 1998, Greenfield has educated more than 8,000 students. We balance strong academics with sport, arts and character building, so every child leaves confident and kind.</p><br>
+      <a class="btn dark" href="#about">Read our story</a></div>
+    <div class="ph">School campus photo</div>
+  </div></section>
+
+  <section class="alt"><div class="wrap"><h2 class="sec-title">Why choose us</h2><p class="sub">What families tell us matters most.</p>
+    <div class="grid">
+      <div class="card"><h3>Experienced teachers</h3><p>Qualified staff with a 1:20 teacher-student ratio.</p></div>
+      <div class="card"><h3>Smart classrooms</h3><p>Digital boards and lab-based learning in every grade.</p></div>
+      <div class="card"><h3>Safe campus</h3><p>CCTV, trained guards and GPS-tracked buses.</p></div>
+      <div class="card"><h3>Whole-child growth</h3><p>Sports, music, clubs and community projects.</p></div>
+    </div></div></section>
+
+  <section><div class="wrap split">
+    <div class="ph">Principal's photo</div>
+    <div><h2 class="sec-title">Principal's message</h2>
+      <blockquote>Every child carries a spark. Our job is to notice it early and give it room to grow. Come and see how we do it.</blockquote>
+      <p style="margin-top:10px"><b>Dr. Anitha Reddy</b>, Principal</p></div>
+  </div></section>
+
+  <section class="alt"><div class="wrap"><h2 class="sec-title">Our academics</h2><p class="sub">Four stages, one steady path.</p>
+    <div class="grid" id="homeAcad"></div></div></section>
+
+  <section><div class="wrap"><h2 class="sec-title">Facilities</h2><p class="sub">Spaces that make learning hands-on.</p>
+    <div class="grid" id="homeFac"></div></div></section>
+
+  <div class="stats"><div class="wrap grid">
+    <div><b data-n="1250">0</b>Students</div><div><b data-n="65">0</b>Teachers</div><div><b data-n="48">0</b>Classrooms</div><div><b data-n="28">0</b>Years of service</div>
+  </div></div>
+
+  <section><div class="wrap split" style="align-items:start">
+    <div><h2 class="sec-title">Latest news</h2><div id="homeNews"></div></div>
+    <div><h2 class="sec-title">Upcoming events</h2><div id="homeEvents"></div></div>
+  </div></section>
+
+  <section class="alt"><div class="wrap"><h2 class="sec-title">Student achievements</h2>
+    <div class="grid">
+      <div class="card"><h3>State Science Fair: 1st place</h3><p>Team of Grade 9 students, October 2026.</p></div>
+      <div class="card"><h3>Board results: 98% distinction</h3><p>Grade 10 batch of 2026.</p></div>
+      <div class="card"><h3>District Athletics: 14 medals</h3><p>Our best season in a decade.</p></div>
+    </div></div></section>
+
+  <section><div class="wrap"><h2 class="sec-title">Parents say</h2><div class="grid" id="homeTesti"></div></div></section>
+
+  <section class="alt"><div class="wrap split" style="align-items:start">
+    <div><h2 class="sec-title">Find us</h2><p>Greenfield International School<br>Road No. 12, Banjara Hills, Hyderabad 500034<br>+91 98765 43210<br>info@greenfieldschool.edu</p></div>
+    <iframe title="School location map" loading="lazy" src="https://www.google.com/maps?q=Banjara+Hills+Hyderabad&output=embed"></iframe>
+  </div></section>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="about">
+  <div class="head"><div class="wrap"><h1>About us</h1></div></div>
+  <section><div class="wrap grid">
+    <div class="card"><h3>History</h3><p>Started in 1998 with 120 students in 6 classrooms, Greenfield now runs a 5-acre campus with 1,250 students.</p></div>
+    <div class="card"><h3>Mission</h3><p>To give every child a strong education and the character to use it well.</p></div>
+    <div class="card"><h3>Vision</h3><p>Confident, curious and compassionate citizens of the world.</p></div>
+    <div class="card"><h3>Chairman's message</h3><p>Schools are built on trust. We keep earning yours every day.</p></div>
+    <div class="card"><h3>Management team</h3><p>Chairman, Principal, two Vice Principals and four Section Heads.</p></div>
+    <div class="card"><h3>Accreditations</h3><p>CBSE affiliated. ISO 9001:2015 certified. Member of the National Green School Network.</p></div>
+  </div></section>
+</div>
+
+<!-- ACADEMICS -->
+<div class="page" id="academics">
+  <div class="head"><div class="wrap"><h1>Academics</h1></div></div>
+  <section><div class="wrap"><div class="grid" id="acadList"></div><br>
+    <div class="grid">
+      <div class="card"><h3>Curriculum</h3><p>CBSE with project-based learning and a second language from Grade 1.</p></div>
+      <div class="card"><h3>Teaching method</h3><p>Concept first, then practice, then real-life application.</p></div>
+      <div class="card"><h3>Examinations</h3><p>Two terms, regular unit tests and continuous assessment.</p></div>
+    </div><br>
+    <h2 class="sec-title">Academic calendar 2026–27</h2>
+    <div class="scroll"><table><tr><th>Month</th><th>Event</th></tr>
+      <tr><td>June</td><td>Classes begin</td></tr><tr><td>September</td><td>Term 1 exams</td></tr>
+      <tr><td>December</td><td>Annual Day and winter break</td></tr><tr><td>March</td><td>Final exams</td></tr></table></div>
+  </div></section>
+</div>
+
+<!-- ADMISSIONS -->
+<div class="page" id="admissions">
+  <div class="head"><div class="wrap"><h1>Admissions</h1></div></div>
+  <section><div class="wrap split" style="align-items:start">
+    <div>
+      <h3>Admission process</h3><ul class="tick"><li>Submit the online form</li><li>Campus visit and interaction</li><li>Assessment (Grade 2 and above)</li><li>Fee payment and confirmation</li></ul><br>
+      <h3>Eligibility</h3><p>Pre-Primary: 3 years by 31 March. Grade 1: 6 years by 31 March.</p><br>
+      <h3>Documents needed</h3><ul class="tick"><li>Birth certificate</li><li>Previous report card</li><li>Transfer certificate</li><li>Aadhaar and 4 photos</li></ul><br>
+      <h3>Fee structure</h3>
+      <div class="scroll"><table><tr><th>Stage</th><th>Per year</th></tr><tr><td>Pre-Primary</td><td>₹45,000</td></tr><tr><td>Primary</td><td>₹58,000</td></tr><tr><td>Middle</td><td>₹68,000</td></tr><tr><td>High</td><td>₹80,000</td></tr></table></div><br>
+      <button class="btn dark" onclick="toast('Prospectus download starts here once you add the PDF')">Download prospectus</button>
+    </div>
+    <div class="card"><h3>Online admission form</h3><br>
+      <form onsubmit="return saveForm(event,'Admission')">
+        <input name="name" placeholder="Student name" required>
+        <input name="parent" placeholder="Parent name" required>
+        <select name="grade" required><option value="">Grade applying for</option><option>Pre-Primary</option><option>Grade 1–5</option><option>Grade 6–8</option><option>Grade 9–12</option></select>
+        <input name="phone" type="tel" placeholder="Phone number" required>
+        <input name="email" type="email" placeholder="Email">
+        <button class="btn">Submit application</button>
+      </form></div>
+  </div></section>
+</div>
+
+<!-- FACILITIES -->
+<div class="page" id="facilities">
+  <div class="head"><div class="wrap"><h1>Facilities</h1></div></div>
+  <section><div class="wrap"><div class="grid" id="facList"></div></div></section>
+</div>
+
+<!-- GALLERY -->
+<div class="page" id="gallery">
+  <div class="head"><div class="wrap"><h1>Gallery</h1></div></div>
+  <section><div class="wrap">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px" id="gTabs"></div>
+    <div class="grid" id="gGrid"></div>
+    <p class="sub" style="margin-top:20px">Replace these tiles with your own photos and YouTube embeds.</p>
+  </div></section>
+</div>
+
+<!-- NEWS -->
+<div class="page" id="news">
+  <div class="head"><div class="wrap"><h1>News &amp; events</h1></div></div>
+  <section><div class="wrap split" style="align-items:start">
+    <div><h2 class="sec-title">Announcements</h2><div id="newsList"></div></div>
+    <div><h2 class="sec-title">Upcoming events</h2><div id="evList"></div></div>
+  </div></section>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="contact">
+  <div class="head"><div class="wrap"><h1>Contact us</h1></div></div>
+  <section><div class="wrap split" style="align-items:start">
+    <div><p>Road No. 12, Banjara Hills, Hyderabad 500034<br>+91 98765 43210<br>info@greenfieldschool.edu</p><br>
+      <iframe title="Map" loading="lazy" src="https://www.google.com/maps?q=Banjara+Hills+Hyderabad&output=embed"></iframe></div>
+    <div class="card"><h3>Send an enquiry</h3><br>
+      <form onsubmit="return saveForm(event,'Enquiry')">
+        <input name="name" placeholder="Your name" required>
+        <input name="phone" type="tel" placeholder="Phone" required>
+        <input name="email" type="email" placeholder="Email">
+        <textarea name="msg" rows="4" placeholder="How can we help?" required></textarea>
+        <button class="btn">Send message</button>
+      </form></div>
+  </div></section>
+</div>
+
+<!-- LOGIN -->
+<div class="page" id="login">
+  <div class="head"><div class="wrap"><h1>Login</h1></div></div>
+  <section><div class="wrap"><div class="card" style="max-width:420px"><form onsubmit="return login(event)">
+    <select id="role"><option value="admin">Admin</option><option value="teacher">Teacher</option><option value="student">Student</option><option value="parent">Parent</option></select>
+    <input id="user" placeholder="Username" required><input id="pass" type="password" placeholder="Password" required>
+    <button class="btn dark">Log in</button>
+    <small>Demo: admin / admin123</small></form></div></div></section>
+</div>
+
+<!-- DASHBOARD -->
+<div class="page" id="dashboard">
+  <section><div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h2 class="sec-title" id="dTitle">Admin dashboard</h2><button class="btn" onclick="logout()">Log out</button></div>
+    <div class="adm"><div class="side" id="side"></div><div id="panel"></div></div>
+  </div></section>
+</div>
+</main>
+
+<footer><div class="wrap grid">
+  <div><h3>Greenfield School</h3><p>Where curious minds grow.</p></div>
+  <div><h3>Quick links</h3><a href="#about">About</a><a href="#admissions">Admissions</a><a href="#gallery">Gallery</a></div>
+  <div><h3>Parents</h3><a href="#login">Parent login</a><a href="#login">Pay fees online</a><a href="#news">Holiday list</a></div>
+  <div><h3>Contact</h3><p>+91 98765 43210<br>info@greenfieldschool.edu</p></div>
+</div><div class="wrap copy">© 2026 Greenfield International School. All rights reserved.</div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- Data (the admin panel edits these and saves to localStorage) ---------- */
+const DEFAULT={
+ news:[{t:"Admissions open for 2027–28",d:"Nov 10",x:"Applications are now open for all grades."},{t:"Science Fair winners announced",d:"Nov 02",x:"Our Grade 9 team won first place at state level."},{t:"Winter holiday notice",d:"Oct 28",x:"School closes 24 Dec and reopens 2 Jan."}],
+ events:[{t:"Annual Day",d:"Dec 14",x:"Main auditorium, 5 PM"},{t:"Sports Day",d:"Dec 02",x:"School grounds, 8 AM"},{t:"Parent-Teacher Meet",d:"Nov 28",x:"Classrooms, 10 AM"}],
+ testi:[{n:"Priya S.",x:"My daughter looks forward to school every morning. The teachers truly know each child."},{n:"Ravi K.",x:"Great communication and a safe, clean campus. Highly recommended."},{n:"Fatima A.",x:"Balanced focus on studies and sports. Our son has grown so much in confidence."}],
+ enquiries:[{type:"Enquiry",name:"Suresh M.",phone:"9000011111",msg:"Fee details for Grade 3?"}]
+};
+const ACAD=[["Pre-Primary","Nursery to UKG. Play-based and gentle."],["Primary","Grades 1–5. Strong reading, maths and curiosity."],["Middle School","Grades 6–8. Labs, projects and clubs."],["High School","Grades 9–12. Board preparation and career guidance."]];
+const FAC=[["Smart classrooms","Digital boards in every room"],["Computer lab","60 systems, coding from Grade 3"],["Science lab","Physics, chemistry, biology"],["Library","20,000 books and a quiet reading hall"],["Sports & games","Cricket, football, basketball, indoor games"],["Transportation","GPS-tracked buses on 24 routes"],["Medical room","Full-time nurse and visiting doctor"],["CCTV security","Whole campus, 24/7 monitoring"]];
+const GAL={"Photo gallery":6,"Video gallery":3,"Annual Day":4,"Sports Day":4,"Cultural events":4,"Educational tours":4};
+let DB;try{DB=JSON.parse(localStorage.getItem("gf_db"))}catch(e){}DB=DB||structuredClone(DEFAULT);
+const save=()=>{try{localStorage.setItem("gf_db",JSON.stringify(DB))}catch(e){}};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function toast(m){const t=$("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",2600)}
+
+/* ---------- Renderers ---------- */
+const cards=a=>a.map(([h,p])=>`<div class="card"><h3>${h}</h3><p>${p}</p></div>`).join("");
+const items=a=>a.map(i=>`<div class="card" style="margin-bottom:12px"><span class="date">${esc(i.d)}</span><h3>${esc(i.t)}</h3><p>${esc(i.x)}</p></div>`).join("")||"<p>Nothing yet.</p>";
+function render(){
+ $("homeAcad").innerHTML=cards(ACAD);$("acadList").innerHTML=cards(ACAD);
+ $("homeFac").innerHTML=cards(FAC.slice(0,4));$("facList").innerHTML=cards(FAC);
+ $("homeNews").innerHTML=items(DB.news.slice(0,3));$("homeEvents").innerHTML=items(DB.events.slice(0,3));
+ $("newsList").innerHTML=items(DB.news);$("evList").innerHTML=items(DB.events);
+ $("homeTesti").innerHTML=DB.testi.map(t=>`<div class="card"><blockquote>${esc(t.x)}</blockquote><p style="margin-top:8px"><b>${esc(t.n)}</b></p></div>`).join("");
+}
+function gallery(k){
+ $("gTabs").innerHTML=Object.keys(GAL).map(g=>`<button class="btn ${g===k?"dark":""}" data-g="${g}">${g}</button>`).join("");
+ $("gTabs").querySelectorAll("button").forEach(b=>b.onclick=()=>gallery(b.dataset.g));
+ $("gGrid").innerHTML=Array.from({length:GAL[k]},(_,i)=>`<div class="ph">${k.includes("Video")?"▶ Video":"Photo"} ${i+1}</div>`).join("");
+}
+function counters(){document.querySelectorAll("[data-n]").forEach(el=>{const n=+el.dataset.n;let c=0;const s=Math.max(1,Math.ceil(n/50));const t=setInterval(()=>{c=Math.min(n,c+s);el.textContent=c.toLocaleString();if(c>=n)clearInterval(t)},25)})}
+
+/* ---------- Forms ---------- */
+function saveForm(e,type){e.preventDefault();const f=Object.fromEntries(new FormData(e.target));
+ DB.enquiries.unshift({type,name:f.name,phone:f.phone,msg:f.msg||`${f.grade||""} application by ${f.parent||""}`});save();e.target.reset();toast("Thank you. We will call you soon.");return false}
+
+/* ---------- Auth + dashboard ---------- */
+let session=null;
+function login(e){e.preventDefault();const r=$("role").value,u=$("user").value,p=$("pass").value;
+ if(r==="admin"&&!(u==="admin"&&p==="admin123")){toast("Wrong username or password");return false}
+ session=r;location.hash="#dashboard";return false}
+function logout(){session=null;location.hash="#home"}
+const MODS={
+ admin:["Overview","Manage news","Manage events","Manage testimonials","Enquiries","Students","Teachers","Settings"],
+ teacher:["Overview","Attendance","Results"],student:["Overview","Attendance","Results","Fees"],parent:["Overview","Child info","Results","Fees"]};
+let mod="Overview";
+function dash(){
+ if(!session){location.hash="#login";return}
+ $("dTitle").textContent=session[0].toUpperCase()+session.slice(1)+" dashboard";
+ $("side").innerHTML=MODS[session].map(m=>`<button class="${m===mod?"on":""}" data-m="${m}">${m}</button>`).join("");
+ $("side").querySelectorAll("button").forEach(b=>b.onclick=()=>{mod=b.dataset.m;dash()});
+ $("panel").innerHTML=panel();
+}
+function listEditor(key,fields){
+ return `<form onsubmit="return add(event,'${key}')" style="max-width:none;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:16px">${fields.map(f=>`<input name="${f[0]}" placeholder="${f[1]}" required>`).join("")}<button class="btn">Add</button></form>
+ <div class="scroll"><table><tr>${fields.map(f=>`<th>${f[1]}</th>`).join("")}<th></th></tr>${DB[key].map((r,i)=>`<tr>${fields.map(f=>`<td>${esc(r[f[0]])}</td>`).join("")}<td><button class="pill" onclick="del('${key}',${i})">Delete</button></td></tr>`).join("")}</table></div>`}
+function add(e,k){e.preventDefault();DB[k].unshift(Object.fromEntries(new FormData(e.target)));save();render();dash();toast("Saved");return false}
+function del(k,i){DB[k].splice(i,1);save();render();dash();toast("Deleted")}
+function panel(){
+ if(mod==="Overview")return `<div class="grid"><div class="card kpi"><b>1,250</b>Total students</div><div class="card kpi"><b>65</b>Total teachers</div><div class="card kpi"><b>${DB.events.length}</b>Upcoming events</div><div class="card kpi"><b>${DB.enquiries.length}</b>Enquiries</div></div><p class="sub" style="margin-top:20px">Use the menu to manage the website. Changes show on the public pages right away.</p>`;
+ if(mod==="Manage news")return listEditor("news",[["t","Title"],["d","Date"],["x","Details"]]);
+ if(mod==="Manage events")return listEditor("events",[["t","Title"],["d","Date"],["x","Details"]]);
+ if(mod==="Manage testimonials")return listEditor("testi",[["n","Parent name"],["x","Feedback"]]);
+ if(mod==="Enquiries")return `<div class="scroll"><table><tr><th>Type</th><th>Name</th><th>Phone</th><th>Message</th></tr>${DB.enquiries.map(r=>`<tr><td><span class="pill">${esc(r.type)}</span></td><td>${esc(r.name)}</td><td>${esc(r.phone)}</td><td>${esc(r.msg)}</td></tr>`).join("")}</table></div>`;
+ if(mod==="Attendance")return `<div class="card"><h3>Attendance this month</h3><p>Present: 94%. Absent: 6%.</p></div>`;
+ if(mod==="Results")return `<div class="scroll"><table><tr><th>Subject</th><th>Marks</th></tr><tr><td>Maths</td><td>88</td></tr><tr><td>Science</td><td>91</td></tr><tr><td>English</td><td>85</td></tr></table></div>`;
+ if(mod==="Fees"||mod==="Child info")return `<div class="card"><h3>${mod}</h3><p>Term 2 fee: ₹20,000 due 30 Nov.</p><br><button class="btn" onclick="toast('Connect a payment gateway such as Razorpay here')">Pay online</button></div>`;
+ return `<div class="card"><h3>${mod}</h3><p>This module needs a backend database. Connect it to your server API.</p></div>`}
+
+/* ---------- Router ---------- */
+function route(){
+ const id=(location.hash||"#home").slice(1);const pg=$(id)?id:"home";
+ document.querySelectorAll(".page").forEach(p=>p.classList.toggle("show",p.id===pg));
+ document.querySelectorAll("#links a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+pg));
+ if(pg==="dashboard")dash();if(pg==="home")counters();
+ window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
+render();gallery("Photo gallery");route();
+</script>
+</body>
+</html>
